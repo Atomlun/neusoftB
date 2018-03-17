@@ -1,0 +1,28 @@
+package com.service.impl;
+
+import java.util.List;
+
+import com.dao.UsersDao;
+import com.dao.impl.UsersDaoDaoImpl;
+import com.service.UsersService;
+import com.utils.UsersRanking;
+
+public class UsersServiceImpl implements UsersService {
+	private UsersDao dao;
+	public UsersServiceImpl() {
+		dao = new UsersDaoDaoImpl();
+	}
+	@Override
+	public List<UsersRanking> getUsersRanking() {
+		
+		try {
+			return	dao.getUsersRanking();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+}

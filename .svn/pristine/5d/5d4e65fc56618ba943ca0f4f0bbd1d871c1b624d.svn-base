@@ -1,0 +1,29 @@
+package com.utils;
+
+public class UsersRanking {
+	   private Integer uid;
+	   private String NAME;
+	   public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
+	}
+	private Integer score;
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+	public Integer getScore() {
+		return score;
+	}
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+	@Override
+	public String toString() {
+		return "UsersRanking [uid=" + uid + ", name=" + NAME + ", score=" + score + "]";
+	}
+}

@@ -1,0 +1,55 @@
+package com.service.impl;
+
+import com.dao.UserDao;
+import com.dao.impl.UserDaoImpl;
+import com.entity.User;
+import com.service.UserService;
+
+public class UserServiceImpl implements UserService{
+
+	
+	private UserDao dao;
+	public UserServiceImpl() {
+		dao = new UserDaoImpl();
+	}
+	@Override
+	public User login(User user) {
+		try {
+			//日志输出
+			user = dao.login(user);
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public int register(String username,String password) {
+          int i;
+		try{
+			i= dao.register(username,password);
+			System.out.println("tb_user表插入成功"+i);
+			return i;
+	    }catch(Exception e){
+	    	 e.printStackTrace();
+	    }
+		return 0;
+	}
+	@Override
+	public int userInfo(String username,String name, String sex, String address,String email) {
+		  
+	        int i;
+	        
+			try {
+				i = dao.getIdByUsername(username);
+				System.out.println("用户id获取成功"+i);
+				return dao.userInfo(i,name, sex,address,email);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		return 0;
+	}
+
+	
+}

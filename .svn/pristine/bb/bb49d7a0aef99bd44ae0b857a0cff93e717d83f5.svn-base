@@ -1,0 +1,12 @@
+package com.service;
+
+import java.util.List;
+
+import com.entity.Post;
+import com.utils.PageUtil;
+
+public interface PostService {
+	PageUtil<Post> getRecentPostList(int pageNum,int pageSize);
+	PageUtil<Post> getHotPostList(int pageNum,int pageSize);
+	List<Post> getPostName(String action);
+}

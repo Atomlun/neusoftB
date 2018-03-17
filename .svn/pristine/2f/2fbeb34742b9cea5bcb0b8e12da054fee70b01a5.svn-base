@@ -1,0 +1,9 @@
+package com.dao;
+
+import java.util.List;
+
+import com.utils.UsersRanking;
+
+public interface UsersDao {
+	 List<UsersRanking> getUsersRanking() throws Exception;
+}

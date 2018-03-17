@@ -1,0 +1,36 @@
+package com.dao.impl;
+
+import java.util.List;
+
+import com.dao.PostDao;
+import com.entity.Post;
+
+public class PostDaoImpl implements PostDao{
+
+	@Override
+	public List<Post> getRecentPostList(int startIndex, int pageSize) throws Exception {
+		String sql = "select * from tb_post ORDER BY potime desc limit ?,?;";
+		List<Post> list = BaseDao.query(sql, Post.class,startIndex,pageSize);
+		return list;
+	}
+	@Override
+	public List<Post> getAllPostList() throws Exception {
+		String sql = "select * from tb_post ;";
+		List<Post> list = BaseDao.query(sql, Post.class);
+		return list;
+	}
+
+	@Override
+	public List<Post> getHotPostList(int startIndex, int pageSize) throws Exception {
+		String sql = "select * from tb_post ORDER BY poclicknum desc limit ?,?;";
+		List<Post> list = BaseDao.query(sql, Post.class,startIndex,pageSize);
+		return list;
+	}
+	@Override
+	public List<Post> getPostName(int i) throws Exception {
+		String sql = "SELECT * from tb_post where pocid=3 ORDER BY  potime  desc LIMIT 0,4;";
+		List<Post> str =BaseDao.query(sql,Post.class);
+		return str;
+	}
+	
+}

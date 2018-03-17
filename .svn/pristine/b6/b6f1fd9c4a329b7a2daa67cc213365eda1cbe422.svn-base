@@ -1,0 +1,54 @@
+package com.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.entity.Post;
+import com.service.PostService;
+import com.service.impl.PostServiceImpl;
+import com.utils.PageUtil;
+
+
+@WebServlet("/show")
+public class RecentPostsListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+      
+    public RecentPostsListServlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String num=request.getParameter("pageNum");
+		int pageNum = 1 ;
+		if(num==null){
+			pageNum=1;
+		}else{
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		int pageSize = 8;
+		
+		
+		PostService service= new PostServiceImpl();
+		
+		PageUtil<Post> PageUtil =service.getRecentPostList(pageNum,pageSize);
+		
+		
+		//将结果填充到内置对象中
+		request.getSession().setAttribute("PageUtil", PageUtil);
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		doGet(request, response);
+	}
+
+}

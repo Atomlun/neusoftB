@@ -1,0 +1,61 @@
+package com.dao.impl;
+
+import java.util.List;
+
+import com.dao.UserDao;
+import com.entity.User;
+
+public class UserDaoImpl extends BaseDao implements UserDao{
+
+	@Override
+	public int addUser(User user) throws Exception {
+		String sql = "insert into tb_user(username,password) values(?,?)";
+		int num = BaseDao.update(sql, user.getUsername(),user.getPassword());
+		return num;
+		
+	}
+
+
+
+	@Override
+	public User login(User user) throws Exception {
+		String sql = "select * from tb_user where username=? and password = ?";
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		List<User> list = BaseDao.query(sql,User.class,user.getUsername(),user.getPassword());
+		System.out.println("查询成功");
+		return list.get(0);
+	
+	}
+
+
+
+	@Override
+	public int register(String username,String password) throws Exception {
+	
+		String sql ="insert into tb_user(username,password) values(?,?)";
+		return  BaseDao.update(sql, username,password);
+		
+	}
+
+
+
+	@Override
+	//注册所有信息
+	public int userInfo(int i, String name, String sex, String address,String email) throws Exception {
+		String sql ="insert into tb_userinfo(uid,NAME,sex,address,email) values(?,?,?,?,?)";
+		return BaseDao.update(sql,i, name, sex, address,email);
+	}
+
+
+
+	@Override
+	//通过用户名找到id
+	public int getIdByUsername(String username) throws Exception {
+		String sql="SELECT * from tb_user WHERE username=?";
+		List<User> list=query(sql,User.class,username);
+		return list.get(0).getUid();
+	}
+
+	
+}

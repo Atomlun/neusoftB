@@ -1,0 +1,18 @@
+package com.dao.impl;
+
+import java.util.List;
+
+import com.dao.PostListDao;
+import com.entity.Post;
+
+public class PostListDaoImpl implements PostListDao {
+
+	@Override
+	public List<Post> findPostByPocid(Integer pocid) throws Exception {
+		String sql = "select * from tb_post where pocid = ?";
+		List<Post> list = BaseDao.query(sql,Post.class,pocid);
+		System.out.println(list);
+		return list;
+	}
+
+}

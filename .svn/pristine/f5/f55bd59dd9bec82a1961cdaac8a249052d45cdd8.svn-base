@@ -1,0 +1,18 @@
+package com.dao.impl;
+
+import java.util.List;
+
+import com.dao.UsersDao;
+import com.entity.Post;
+import com.utils.UsersRanking;
+
+public class UsersDaoDaoImpl implements UsersDao {
+
+	@Override
+	public List<UsersRanking> getUsersRanking() throws Exception {
+		String sql="SELECT a.uid, a. NAME, score FROM tb_userinfo a LEFT JOIN tb_userscore b ON a.uid = b.uid LEFT JOIN tb_user c ON b.uid = c.uid WHERE c.ualevel != 's' ORDER BY score DESC LIMIT 0, 10";
+		List<UsersRanking> list = BaseDao.query(sql, UsersRanking.class);
+		return list;
+	}
+
+}

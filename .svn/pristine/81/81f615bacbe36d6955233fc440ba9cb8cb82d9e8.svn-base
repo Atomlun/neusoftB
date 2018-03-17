@@ -1,0 +1,17 @@
+package com.service.impl;
+
+import java.util.List;
+
+import com.dao.CateGoryDao;
+import com.dao.impl.CateGoryDaoImpl;
+import com.entity.Post;
+import com.entity.Postcate;
+import com.service.CateGoryService;
+
+public class CateGoryServiceImpl implements CateGoryService {
+
+	CateGoryDao category = new CateGoryDaoImpl();
+	
+	
+
+}

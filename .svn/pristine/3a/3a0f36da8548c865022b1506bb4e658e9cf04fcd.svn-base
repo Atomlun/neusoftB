@@ -1,0 +1,75 @@
+package com.controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.entity.User;
+import com.entity.Userinfo;
+import com.service.UserService;
+
+import com.service.impl.UserServiceImpl;
+
+/**
+ * Servlet implementation class RegisterServlet
+ */
+@WebServlet("/Register")
+public class RegisterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	public RegisterServlet() {
+        super();
+       
+    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		   String username =request.getParameter("username");	
+		   
+		   System.out.println(username);
+		   String password =request.getParameter("password");
+		   System.out.println(password);
+		   String sex =request.getParameter("sex");
+		   System.out.println(sex);
+		   String name =request.getParameter("name");
+		   System.out.println(name);
+		   String email =request.getParameter("email");
+		   System.out.println(email);
+		   String address=request.getParameter("address");
+		   System.out.println(address);
+			
+		    User user =new User();
+            Userinfo info =new Userinfo();
+            
+            
+			UserService register =new UserServiceImpl();
+			
+			 
+			int i = register.register(username,password);
+            if(i>0){
+            	  System.out.println("user×¢²á³É¹¦");
+			      int j=register.userInfo(username,name, sex,address,email);
+			      if(j>0){
+			    	  System.out.println("×¢²á³É¹¦");
+			    	  
+			    	  request.getRequestDispatcher("Login.jsp").forward(request, response);
+			    	  
+			      }else{
+			    	  System.out.println("×¢²áÊ§°Ü");
+			      }
+            }	
+		
+	}
+
+	
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

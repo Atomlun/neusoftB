@@ -1,0 +1,9 @@
+package com.service;
+
+import com.entity.User;
+
+public interface UserService {
+	 int register(String username,String password);
+	 User login(User user);
+	 int userInfo(String username,String name, String sex, String address,String email);
+}

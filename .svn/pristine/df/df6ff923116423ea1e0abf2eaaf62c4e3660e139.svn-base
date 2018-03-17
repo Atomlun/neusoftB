@@ -1,0 +1,19 @@
+package com.dao.impl;
+
+import java.util.List;
+
+import com.dao.CateGoryDao;
+import com.entity.Postcate;
+
+public class CateGoryDaoImpl implements CateGoryDao{
+
+	@Override
+		public List<Postcate> findAllPostcates() throws Exception {
+			String sql = "select * from tb_postcate ";
+			List<Postcate> list = BaseDao.query(sql,Postcate.class);
+			System.out.println(list);
+			return list;
+		
+	}
+		
+}

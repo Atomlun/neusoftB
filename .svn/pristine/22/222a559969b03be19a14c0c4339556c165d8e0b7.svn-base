@@ -1,0 +1,55 @@
+package com.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/DemoServlet")
+public class DemoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public DemoServlet() {
+		super();
+	}
+
+	/**
+	 * 模拟 搜索功能
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// 乱码处理
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
+		// 执行成功后跳转的页面url
+		String url = "searchResult.jsp";
+		
+		// 从前台获取的参数
+		String keyword = request.getParameter("keyword");
+		
+		
+		//UserService service = new UserServiceImpl();
+		PostService service = new PostServiceImpl();
+		
+		//将查询结果存入list中
+		List<Post> list = service.findByKeyWord(keyword);
+		
+		// 将list存入request中
+		request.setAttribute("list", list);
+		
+		// 跳转至url
+		response.sendRedirect(url);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		doGet(request, response);
+	}
+
+}
